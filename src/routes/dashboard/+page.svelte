@@ -13,23 +13,36 @@
     }
 </script>
 
-<di class="mainContent">
+<div class="mainContainer">
     <div class="headerContainer">
-        <h1>Todo list</h1>
-        <button> <i class="fa-regular fa-floppy-disk"></i> Save</button>
+        <h1>Todo List</h1>
+        <div class="headerBtns">
+            <button >
+                <i class="fa-regular fa-floppy-disk" />
+                <p>Save</p></button
+            >
+            <button>
+                <i class="fa-solid fa-right-from-bracket" />
+                <p>Logout</p></button
+            >
+        </div>
     </div>
     <main>
         {#each todoList as todo, index}
         <div class="todo">
-            {index + 1}. {todo}
+            <p> {index + 1}. {todo}</p>
+            <div class="actions">
+                <i class="fa-regular fa-pen-to-square"></i>
+                <i class="fa-regular fa-trash-can"></i>
+            </div>
         </div>
         {/each}
     </main>
-    <div class={"enterTodo" + "errorBorder" }>
-        <input type="text" bind:value={currTodo}  placeholder="Add a new todo" />
-        <button>Add</button>
+    <div class={"enterTodo " + (error ? "errorBorder" : "")}>
+        <input bind:value={currTodo} type="text" placeholder="Enter todo" />
+        <button on:click={addTodo}>ADD</button>
     </div>
-</di>
+</div>
 <style>
     .mainContainer {
         display: flex;
@@ -117,5 +130,28 @@
 
     .enterTodo button:hover {
         background: transparent;
+    }
+
+    .todo {
+        border-left: 1px solid cyan;
+        padding: 8px 14px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .actions {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        font-size: 1.3rem;
+    }
+
+    .actions i {
+        cursor: pointer;
+    }
+
+    .actions i:hover {
+        color: coral;
     }
 </style>
